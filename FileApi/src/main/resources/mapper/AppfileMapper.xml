@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.zut.hys.fileapi.generator.mapper.AppfileMapper">
+
+    <resultMap id="BaseResultMap" type="edu.zut.hys.domain.Appfile">
+            <id property="fileid" column="fileid" jdbcType="BIGINT"/>
+            <result property="status" column="status" jdbcType="VARCHAR"/>
+            <result property="userid" column="userid" jdbcType="BIGINT"/>
+            <result property="createtime" column="createtime" jdbcType="TIMESTAMP"/>
+            <result property="filename" column="filename" jdbcType="VARCHAR"/>
+            <result property="extendname" column="extendname" jdbcType="VARCHAR"/>
+            <result property="relationtype" column="relationtype" jdbcType="VARCHAR"/>
+            <result property="relationid" column="relationid" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        fileid,status,userid,
+        createtime,filename,extendname,
+        relationtype,relationid
+    </sql>
+</mapper>

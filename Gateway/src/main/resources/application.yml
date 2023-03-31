@@ -1,0 +1,107 @@
+spring:
+  redis:
+    database: 0
+    port: 6379
+    host:
+    password:
+  datasource:
+    username:
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://:3306/awakeningera?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      stat-view-servlet:
+        enabled: false
+      web-stat-filter:
+        enabled: false
+  cloud:
+    gateway:
+      routes: #配置路由路径
+        - id: userapi
+          uri: lb://userapi
+          predicates:
+            - Path=/user/**
+#          filters:
+#            - StripPrefix=1
+        - id: auth
+          uri: lb://auth
+          predicates:
+            - Path=/auth/**
+#          filters:
+#            - StripPrefix=1
+        - id: articleapi
+          uri: lb://articleapi
+          predicates:
+             - Path=/article/**
+        - id: commentapi
+          uri: lb://commentapi
+          predicates:
+            - Path=/comment/**
+        - id: fileapi
+          uri: lb://fileapi
+          predicates:
+            - Path=/file/**
+        - id: followapi
+          uri: lb://followapi
+          predicates:
+            - Path=/follow/**
+        - id: heartenapi
+          uri: lb://heartenapi
+          predicates:
+            - Path=/hearten/**
+        - id: messageapi
+          uri: lb://messageapi
+          predicates:
+            - Path=/message/**
+        - id: noticeapi
+          uri: lb://noticeapi
+          predicates:
+            - Path=/notice/**
+        - id: sessionapi
+          uri: lb://sessionapi
+          predicates:
+            - Path=/session/**
+      discovery:
+        locator:
+          enabled: true #开启从注册中心动态创建路由的功能
+          lower-case-service-id: true #使用小写服务名，默认是大写
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowCredentials: true
+            allowedOriginPatterns: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+        add-to-simple-url-handler-mapping: true
+    sentinel:
+      transport:
+        dashboard: 124.222.162.206:8000
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: "http://localhost:8190/auth/rsa/publicKey" #访问网关本身转发到配置RSA的公钥访问地址
+  cache:
+    type: redis
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    local-cache-scope: statement
+    cache-enabled: true
+#secure:
+#  ignore:
+#    urls: #配置白名单路径
+#      - "/actuator/**"
+#      - "/auth/oauth/token"
+#      - "/auth/rsa/publicKey"#权限
+#      - "/article/getarticle"#文章
+#      - "/comment/selectcomments"#评论
+#      - "/message/imserver/**"
+#      - "/file/preview/**"
+#      - "/user/register"
+#      - "/article/getarticleinelasticsearch"
+#      - "/file/getheadshot"
+#      - "/file/updateheadshot"
+
+

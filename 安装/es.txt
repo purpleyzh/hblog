@@ -1,0 +1,96 @@
+PUT /article
+{
+  "mappings": {
+    "properties": {
+      "id":{
+        "type":"keyword"
+      },
+      "status":{
+        "type":"keyword"
+      },
+      "createtime":{
+        "type":"date",
+        "format": "yyyy-MM-dd HH:mm:ss || epoch_millis"
+      },
+      "userid":{
+        "type": "long"
+      },
+      "title":{
+        "type": "text",
+        "analyzer": "ik_max_word"
+      },
+      "body":{
+        "type": "text",
+        "analyzer": "ik_max_word"
+      }
+    }
+  }
+}
+
+DELETE /article
+
+POST /article/_doc/1
+{
+  "id":"1",
+  "status":"1",
+  "createtime":"2022-02-04 18:56:52",
+  "userid":1,
+  "title":"觉醒年代之陈独秀《研究室与监狱》",
+  "body": "<!DOCTYPE html><html><head></head><body><p style=\"padding-left: 40px; text-align: left;\">世界文明的发源地有二：一是科学研究室。一是监狱。</p><p style=\"padding-left: 40px; text-align: left;\">我们青年立志出了研究室就入监狱，出了监狱就入研究室，这才是人生最高尚优美的生活。</p><p style=\"padding-left: 40px; text-align: left;\">从这两处发生的文明，才是真文明，才是有生命有价值的文明。</p></body></html>"
+}
+
+POST /article/_doc/2
+{
+  "id":"2",
+  "status":"1",
+  "createtime":"2022-02-04 18:56:52",
+  "userid":1,
+  "title":"test",
+  "body":"爱国心与自觉心"
+}
+
+GET /article/_doc/11
+
+GET /article/_search
+
+GET /article/_search
+{
+  "query": {
+    "match": {
+      "title": "幸运咖"
+    }
+  }
+}
+
+GET /article/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "multi_match": {
+            "query": "科学研究",
+            "fields": ["title", "name"]
+          }
+        }
+      ],
+      "filter": [
+        {
+          "term": {
+            "status": "1"
+          }
+        }
+      ]
+    }
+  },
+  "highlight": {
+    "fields": {
+      "title":{
+        "require_field_match": "false"
+      },
+      "body": {
+        "require_field_match": "false"
+      }
+    }
+  }
+}

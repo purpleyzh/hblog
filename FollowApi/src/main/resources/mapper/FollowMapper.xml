@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.zut.hys.followapi.generator.mapper.FollowMapper">
+
+    <resultMap id="BaseResultMap" type="edu.zut.hys.domain.Follow">
+            <id property="followid" column="followid" jdbcType="BIGINT"/>
+            <result property="status" column="status" jdbcType="VARCHAR"/>
+            <result property="userid" column="userid" jdbcType="BIGINT"/>
+            <result property="createtime" column="createtime" jdbcType="TIMESTAMP"/>
+            <result property="touserid" column="touserid" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        followid,status,userid,
+        createtime,touserid
+    </sql>
+</mapper>

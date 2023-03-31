@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.zut.hys.noticeapi.generator.mapper.NoticeMapper">
+
+    <resultMap id="BaseResultMap" type="edu.zut.hys.domain.Notice">
+            <id property="noticeid" column="noticeid" jdbcType="BIGINT"/>
+            <result property="status" column="status" jdbcType="VARCHAR"/>
+            <result property="createtime" column="createtime" jdbcType="TIMESTAMP"/>
+            <result property="userid" column="userid" jdbcType="BIGINT"/>
+            <result property="sendtype" column="sendtype" jdbcType="VARCHAR"/>
+            <result property="touserid" column="touserid" jdbcType="BIGINT"/>
+            <result property="bodytype" column="bodytype" jdbcType="VARCHAR"/>
+            <result property="body" column="body" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        noticeid,status,createtime,
+        userid,sendtype,touserid,
+        bodytype,body
+    </sql>
+</mapper>
